@@ -4,7 +4,8 @@ import * as dotenv from 'dotenv' //untuk env
 import logs from './middleware/logs.js' //
 import diseaseRoute from './route/diseaseRoute.js'
 import plantRoute from './route/plantRoute.js'
-// tambahkan route store
+import authRoute from './route/authRoute.js'
+import storeRoute from './route/storeRoute.js'
 
 dotenv.config()
 
@@ -17,9 +18,10 @@ app.use(express.urlencoded({ extended: false }));  //berupa url decoded
 app.use(logs)
 
 // routes
+app.use(authRoute)
 app.use(diseaseRoute)
 app.use(plantRoute)
-// tambahkan route store
+app.use(storeRoute)
 
 ////////////
 app.listen(`${port}`, () => {
