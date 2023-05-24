@@ -1,6 +1,7 @@
 import express from 'express'
 import { plantValidate } from '../validation/plantSchema.js'
 import { validate } from '../middleware/validate.js'
+import auth from '../middleware/authentication.js'
 
 // memanggil controller plant
 import {
@@ -13,18 +14,18 @@ const router = express.Router()
 // ENDPOINT API
 
 // GET DATA
-router.get('/plants', getPlant)
+router.get('/plants', auth, getPlant)
 
 // GET DATA BY ID
-router.get('/plants/:plant_id', getByIdPlant)
+router.get('/plants/:plant_id', auth, getByIdPlant)
 
 // POST DATA
-router.post('/plants', validate(plantValidate), postPlant)
+router.post('/plants', auth, validate(plantValidate), postPlant)
 
 // UPDATE DATA
-router.put('/plants/:plant_id', validate(plantValidate), updatePlant)
+router.put('/plants/:plant_id', auth, validate(plantValidate), updatePlant)
 
 // DELETE DATA
-router.delete('/plants/:plant_id', deletePlant)
+router.delete('/plants/:plant_id', auth, deletePlant)
 
 export default router 

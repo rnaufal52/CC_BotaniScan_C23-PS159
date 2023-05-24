@@ -1,6 +1,7 @@
 import express from 'express'
 import { storeValidate } from '../validation/storeSchema.js'
 import { validate } from '../middleware/validate.js'
+import auth from '../middleware/authentication.js'
 
 // memanggil controller about
 import {
@@ -16,15 +17,15 @@ const router = express.Router()
 router.get('/store', getStore)
 
 // GET DATA BY ID
-router.get('/store/:store_id', getByIdStore)
+router.get('/store/:store_id', auth, getByIdStore)
 
 // POST DATA
-router.post('/store', validate(storeValidate), postStore)
+router.post('/store', auth, validate(storeValidate), postStore)
 
 // UPDATE DATA
-router.put('/store/:store_id', validate(storeValidate), updateStore)
+router.put('/store/:store_id', auth, validate(storeValidate), updateStore)
 
 // DELETE DATA
-router.delete('/store/:store_id', deleteStore)
+router.delete('/store/:store_id', auth, deleteStore)
 
 export default router 
