@@ -128,4 +128,4 @@ Then you can use the following image to create your own database:
 
 # Pull Requests
 
-I'd be happy to review any pull requests that may better the TanamIn project, in particular if you have a bug fix, enhancement, or a new idea, you can contact us.
+I'd be happy to review any pull requests that may better the BotaniScan project, in particular if you have a bug fix, enhancement, or a new idea, you can contact us.
