@@ -6,6 +6,7 @@ import diseaseRoute from './route/diseaseRoute.js'
 import plantRoute from './route/plantRoute.js'
 import authRoute from './route/authRoute.js'
 import storeRoute from './route/storeRoute.js'
+import userRoute from './route/userRoute.js'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(authRoute)
 app.use(diseaseRoute)
 app.use(plantRoute)
 app.use(storeRoute)
+app.use(userRoute)
 
 ////////////
 app.listen(`${port}`, () => {
