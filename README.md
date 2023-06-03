@@ -22,7 +22,7 @@ Our Member :
 1. Machine Learning
 > https://github.com/caricadeffa/ML_BotaniScan_C23-PS159
 2. Mobile Development
-> Link Mobile
+> https://github.com/nursalim92/MD_BotaniScan_C23-PS159
 
 ## The service available:
 > Base url of this service is: http://localhost:4000/
@@ -31,10 +31,9 @@ Our Member :
   <pre>POST  /register</pre>
   <pre>POST  /refresh</pre>
 
-- User (under development)
-  <pre>GET  /user/{userId}</pre>
-  <pre>PUT  /user/{userId}</pre>
-  <pre>DEL /user/{userId}</pre>
+- User
+  <pre>GET  /user</pre>
+  <pre>PUT  /user/{userI</pre>
 
 - Predictions (under development)
   <pre>POST /prediction/potato</pre>
