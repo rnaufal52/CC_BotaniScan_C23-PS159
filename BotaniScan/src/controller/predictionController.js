@@ -4,7 +4,6 @@ import fs from 'fs'
 import { nanoid } from "nanoid"
 import { postPredictModel, getDiseaseId, getPlantId } from '../models/predictModel.js'
 
-dotenv.config()
 
 const predictionPlant = async (req, res, plant) => {
     try {
