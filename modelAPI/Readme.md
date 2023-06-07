@@ -15,7 +15,7 @@ python -m venv myenv
 3. Activate virtual env
 
 ```bash
-myenv\Scripts\activate
+myenv/Scripts/activate
 ```
 
 4. Install dependencies yang dibutuhkan
