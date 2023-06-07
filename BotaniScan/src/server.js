@@ -2,11 +2,14 @@
 import express from 'express'
 import * as dotenv from 'dotenv' //untuk env
 import logs from './middleware/logs.js' //
-import diseaseRoute from './route/diseaseRoute.js'
-import plantRoute from './route/plantRoute.js'
 import authRoute from './route/authRoute.js'
-import storeRoute from './route/storeRoute.js'
 import userRoute from './route/userRoute.js'
+import predictRoute from './route/predictRoute.js'
+import historyRoute from './route/historyRoute.js'
+import storeRoute from './route/storeRoute.js'
+import plantRoute from './route/plantRoute.js'
+import diseaseRoute from './route/diseaseRoute.js'
+
 
 dotenv.config()
 
@@ -20,10 +23,14 @@ app.use(logs)
 
 // routes
 app.use(authRoute)
-app.use(diseaseRoute)
-app.use(plantRoute)
-app.use(storeRoute)
 app.use(userRoute)
+app.use(predictRoute)
+app.use(historyRoute)
+app.use(storeRoute)
+app.use(plantRoute)
+app.use(diseaseRoute)
+
+
 
 ////////////
 app.listen(`${port}`, () => {
