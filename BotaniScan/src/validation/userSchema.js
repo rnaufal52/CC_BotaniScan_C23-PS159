@@ -9,9 +9,6 @@ const userValidate = Joi.object({
     email: Joi.string()
         .min(10)
         .required(),
-    password: Joi.string()
-        .min(10)
-        .required(),
 }).options({ abortEarly: false })
 
 export { userValidate }
