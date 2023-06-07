@@ -36,14 +36,14 @@ const getByIdDisease = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'Success grab data disease',
                 data: data,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({
@@ -58,7 +58,7 @@ const getByIdDisease = async (req, res) => {
 // post
 const postDisease = async (req, res) => {
     const { body } = req
-    const disease_id = nanoid(16);
+    const disease_id = nanoid(16)
     try {
         const [data] = await postDiseaseModel(body, disease_id)
         res.json({
@@ -89,7 +89,7 @@ const updateDisease = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
@@ -119,14 +119,14 @@ const deleteDisease = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'success deleted disease',
                 data: null,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({

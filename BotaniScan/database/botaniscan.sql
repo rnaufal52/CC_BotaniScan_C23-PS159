@@ -43,3 +43,7 @@ CREATE TABLE `store` (
   `created_at` datetime,
   `updated_at` datetime
 );
+
+CREATE TABLE `blacklist` (
+  `token` varchar(512)
+);

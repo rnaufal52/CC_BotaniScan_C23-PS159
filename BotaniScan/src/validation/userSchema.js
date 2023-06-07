@@ -1,14 +1,14 @@
 import Joi from "joi"
 
 // rules validasi
-const plantValidate = Joi.object({
+const userValidate = Joi.object({
     name: Joi.string()
-        .min(4)
+        .min(5)
         .max(50)
         .required(),
-    desc: Joi.string()
+    email: Joi.string()
         .min(10)
         .required(),
 }).options({ abortEarly: false })
 
-export { plantValidate }
+export { userValidate }
