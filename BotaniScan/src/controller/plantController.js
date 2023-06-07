@@ -36,14 +36,14 @@ const getByIdPlant = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data plant not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'Success grab data plant',
                 data: data,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({
@@ -58,10 +58,9 @@ const getByIdPlant = async (req, res) => {
 // post
 const postPlant = async (req, res) => {
     const { body } = req
-    const plant_id = nanoid(16);
-    // const dates=newDate();
+    const plant_id = nanoid(16)
     try {
-        const [data] = await postPlantModel(body, plant_id) //tambahi dates
+        const [data] = await postPlantModel(body, plant_id)
         res.json({
             code: 200,
             status: "OK",
@@ -82,16 +81,15 @@ const postPlant = async (req, res) => {
 const updatePlant = async (req, res) => {
     const { plant_id } = req.params
     const { body } = req
-    // const update_at=newDate();
     try {
-        const [data] = await updatePlantModel(body, plant_id) //tambahi update_at
+        const [data] = await updatePlantModel(body, plant_id)
         if (data.affectedRows === 0) {
             res.status(404).json({
                 code: 404,
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
@@ -121,14 +119,14 @@ const deletePlant = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'success deleted plant',
                 data: null,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({

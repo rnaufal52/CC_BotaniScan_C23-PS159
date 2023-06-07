@@ -36,14 +36,14 @@ const getByIdStore = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'Success grab data store',
                 data: data,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({
@@ -58,8 +58,8 @@ const getByIdStore = async (req, res) => {
 // post
 const postStore = async (req, res) => {
     const { body } = req
-    const store_id = nanoid(16);
-    const dates= new Date();
+    const store_id = nanoid(16)
+    const dates = new Date()
     try {
         const [data] = await postStoreModel(body, store_id, dates)
         res.json({
@@ -82,7 +82,7 @@ const postStore = async (req, res) => {
 const updateStore = async (req, res) => {
     const { store_id } = req.params
     const { body } = req
-    const dates= new Date();
+    const dates = new Date()
     try {
         const [data] = await updateStoreModel(body, store_id, dates)
         if (data.affectedRows === 0) {
@@ -91,7 +91,7 @@ const updateStore = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
@@ -121,14 +121,14 @@ const deleteStore = async (req, res) => {
                 status: 'NOT FOUND',
                 message: 'Data not found',
                 data: null,
-            });
+            })
         } else {
             res.json({
                 code: 200,
                 status: 'OK',
                 message: 'success deleted store',
                 data: null,
-            });
+            })
         }
     } catch (error) {
         res.status(500).json({

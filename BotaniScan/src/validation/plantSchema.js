@@ -3,7 +3,7 @@ import Joi from "joi"
 // rules validasi
 const plantValidate = Joi.object({
     name: Joi.string()
-        .min(5)
+        .min(4)
         .max(50)
         .required(),
     desc: Joi.string()

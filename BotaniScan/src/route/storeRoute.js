@@ -14,7 +14,7 @@ const router = express.Router()
 // ENDPOINT API
 
 // GET DATA
-router.get('/store', getStore)
+router.get('/store', auth, getStore)
 
 // GET DATA BY ID
 router.get('/store/:store_id', auth, getByIdStore)
