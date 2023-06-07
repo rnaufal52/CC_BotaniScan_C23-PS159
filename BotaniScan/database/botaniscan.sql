@@ -45,5 +45,6 @@ CREATE TABLE `store` (
 );
 
 CREATE TABLE `blacklist` (
+  `Id` BIGINT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`Id`),
   `token` varchar(512)
 );
