@@ -1,8 +1,8 @@
 import logging
 from flask import jsonify
-import tensorflow as tf
 from tensorflow.keras.models import load_model
-import cv2
+from tensorflow.keras.preprocessing import image
+import io
 import numpy as np
 
 # Load corn model
@@ -24,28 +24,25 @@ def predict_corn(request):
         return jsonify({'error': 'No filename provided'})
 
     try:
-        # Baca gambar dan ubah ke dalam format yang sesuai
-        img = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_COLOR)
+        file = request.files['file']
+        img = image.load_img(io.BytesIO(file.read()), target_size=(256, 256))
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+  
+        images = np.vstack([x])
+        images /= 255
 
-        # Resize gambar ke ukuran yang diharapkan oleh model (256x256)
-        resized_img = cv2.resize(img, (256, 256))
-
-        # Ubah gambar menjadi format yang sesuai dengan model
-        processed_img = preprocess_image(resized_img)
-
-        # Lakukan prediksi menggunakan model
-        prediction = model.predict(processed_img)
-        predicted_class = np.argmax(prediction)
-        predicted_percentage = np.max(prediction) * 100
+        classes = model.predict(images, batch_size=32)
+        predicted_class_indices = np.argmax(classes)
 
         # Contoh: Anda dapat mengembalikan hasil prediksi sebagai label kelas dan persentase prediksinya
         class_labels = ['Corn Cercospora Leaf Spot Gray', 'Corn Common Rust', 'Corn Healthy', 'Corn Northern Leaf Blight', 'Not Corn Clean']
-        predicted_label = class_labels[predicted_class]
+        predicted_label = class_labels[predicted_class_indices]
 
         # Format hasil prediksi sebagai JSON
         response = {
             'prediction': predicted_label,
-            'confidence': round(predicted_percentage, 2)
+            'confidence': round(np.max(classes) * 100, 2)
         }
 
         # Mengembalikan respons JSON

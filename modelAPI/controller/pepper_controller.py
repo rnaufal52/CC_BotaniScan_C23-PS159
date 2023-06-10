@@ -1,8 +1,8 @@
 import logging
 from flask import jsonify
-import tensorflow as tf
 from tensorflow.keras.models import load_model
-import cv2
+from tensorflow.keras.preprocessing import image
+import io
 import numpy as np
 
 # Load pepper model
@@ -24,28 +24,25 @@ def predict_pepper(request):
         return jsonify({'error': 'No filename provided'})
 
     try:
-        # Baca gambar dan ubah ke dalam format yang sesuai
-        img = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_COLOR)
+        file = request.files['file']
+        img = image.load_img(io.BytesIO(file.read()), target_size=(224, 224))
+        x = image.img_to_array(img)
+        x = np.expand_dims(x, axis=0)
+  
+        images = np.vstack([x])
+        images /= 255
 
-        # Resize gambar ke ukuran yang diharapkan oleh model (224x224)
-        resized_img = cv2.resize(img, (224, 224))
 
-        # Ubah gambar menjadi format yang sesuai dengan model
-        processed_img = preprocess_image(resized_img)
+        classes = model.predict(images, batch_size=32)
+        predicted_class_indices = np.argmax(classes)
 
-        # Lakukan prediksi menggunakan model
-        prediction = model.predict(processed_img)
-        predicted_class = np.argmax(prediction)
-        predicted_percentage = np.max(prediction) * 100
-
-        # Contoh: Anda dapat mengembalikan hasil prediksi sebagai label kelas dan persentase prediksinya
-        class_labels = ['Not__Pepper__bell','Pepper__bell___Bacterial_spot','Pepper__bell___healthy']
-        predicted_label = class_labels[predicted_class]
+        class_labels = ['Not Pepper bell', 'Pepper bell Bacterial spot', 'Pepper bell healthy']
+        predicted_label = class_labels[predicted_class_indices]
 
         # Format hasil prediksi sebagai JSON
         response = {
             'prediction': predicted_label,
-            'confidence': round(predicted_percentage, 2)
+            'confidence': round(np.max(classes) * 100, 2)
         }
 
         # Mengembalikan respons JSON
@@ -53,12 +50,3 @@ def predict_pepper(request):
     except Exception as e:
         logging.error(str(e))
         return jsonify({'error': 'Invalid image file'})
-
-def preprocess_image(image):
-    # Normalisasi gambar
-    image = image.astype('float32') / 255.0
-
-    # Ekspansi dimensi gambar (menyesuaikan dengan input model)
-    image = np.expand_dims(image, axis=0)
-
-    return image
