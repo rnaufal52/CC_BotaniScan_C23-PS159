@@ -30,10 +30,11 @@ Our Member :
   <pre>POST /login</pre>
   <pre>POST  /register</pre>
   <pre>POST  /refresh</pre>
+  <pre>POST  /logout</pre>
 
 - User
   <pre>GET  /user</pre>
-  <pre>PUT  /user/{userI</pre>
+  <pre>PUT  /user</pre>
 
 - Predictions (under development)
   <pre>POST /prediction/potato</pre>
