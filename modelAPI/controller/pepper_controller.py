@@ -32,10 +32,10 @@ def predict_pepper(request):
         images = np.vstack([x])
         images /= 255
 
+
         classes = model.predict(images, batch_size=32)
         predicted_class_indices = np.argmax(classes)
 
-        # Contoh: Anda dapat mengembalikan hasil prediksi sebagai label kelas dan persentase prediksinya
         class_labels = ['Not Pepper bell', 'Pepper bell Bacterial spot', 'Pepper bell healthy']
         predicted_label = class_labels[predicted_class_indices]
 
