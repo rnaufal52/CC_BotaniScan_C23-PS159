@@ -44,7 +44,6 @@ Our Member :
 - History (under development)
   <pre>GET  /history/</pre>
   <pre>GET  /history/{historyId}</pre>
-  <pre>POST /history</pre>
   <pre>DEL  /history/{historyId}</pre>
 
 - Plant
