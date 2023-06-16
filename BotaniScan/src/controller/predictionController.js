@@ -37,7 +37,7 @@ const predictionPlant = async (req, res, plant) => {
 
     // komunikasi dengan api untuk prediksi
     const response = await axios.post(
-      `http://34.128.124.110:5000/predict/${plant}`,
+      `http://127.0.0.1:5000/predict/${plant}`,
       formData,
       config
     )
