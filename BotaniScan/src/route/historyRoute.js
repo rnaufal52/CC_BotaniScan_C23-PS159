@@ -17,6 +17,6 @@ router.get('/history', auth, getHistory)
 router.get('/history/:prediction_id', auth, getByIdHistory)
 
 // Delete DATA
-router.get('/history/:prediction_id', auth, deleteHistory)
+router.delete('/history/:prediction_id', auth, deleteHistory)
 
 export default router
