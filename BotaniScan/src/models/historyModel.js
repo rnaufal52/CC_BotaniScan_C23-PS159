@@ -5,11 +5,11 @@ const getHistoryModel = (user_id) => {
     const SQLQuery = `
         SELECT prediction.prediction_id, prediction.img_url, prediction.accuration,
                plant.name AS plant_name, plant.desc AS plant_desc,
-               disease.name AS disease_name, disease.desc AS disease_desc, disease.solution
+               disease.name AS disease_name, disease.desc AS disease_desc, disease.solution,prediction.created_at
         FROM prediction
         INNER JOIN plant ON prediction.plant_id = plant.plant_id
         INNER JOIN disease ON prediction.disease_id = disease.disease_id
-        WHERE prediction.user_id = ?
+        WHERE prediction.user_id = ? ORDER BY prediction.created_at DESC
     `
     const values = [user_id]
 
@@ -23,7 +23,8 @@ const getHistoryModel = (user_id) => {
                 plant_desc: row.plant_desc,
                 disease_name: row.disease_name,
                 disease_desc: row.disease_desc,
-                solution: row.solution
+                solution: row.solution,
+                created_at:row.created_at
             }))
             return result
         })
@@ -34,7 +35,7 @@ const getHistoryModelById = (prediction_id) => {
     const SQLQuery = `
         SELECT prediction.prediction_id, prediction.img_url, prediction.accuration,
                plant.name AS plant_name, plant.desc AS plant_desc,
-               disease.name AS disease_name, disease.desc AS disease_desc, disease.solution
+               disease.name AS disease_name, disease.desc AS disease_desc, disease.solution,prediction.created_at
         FROM prediction
         INNER JOIN plant ON prediction.plant_id = plant.plant_id
         INNER JOIN disease ON prediction.disease_id = disease.disease_id
@@ -52,7 +53,8 @@ const getHistoryModelById = (prediction_id) => {
                 plant_desc: row.plant_desc,
                 disease_name: row.disease_name,
                 disease_desc: row.disease_desc,
-                solution: row.solution
+                solution: row.solution,
+                created_at:row.created_at
             }))
             return result
         })
